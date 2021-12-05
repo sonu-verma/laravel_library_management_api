@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use Illuminate\Support\Facades\Auth;
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -25,8 +25,12 @@ class User extends Authenticatable implements JWTSubject
         'mobile',
         'age',
         'gender',
-        'city'
+        'city',
+        'password'
+
     ];
+
+    protected $primaryKey = 'u_id';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -61,5 +65,19 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+
+    public function isAdmin()
+    {
+        if(Auth::User()->email == 'admin@gmail.com'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function book(){
+        return $this->belongsToMany('App\Models\Book', 'user_book', 'u_id', 'b_id')->withPivot(['action_type','created_at','updated_at']);
     }
 }

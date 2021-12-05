@@ -25,6 +25,20 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            [
+                'firstname'    => 'admin', 
+                'lastname'     => 'admin',
+                'mobile'     => '9874563210', 
+                'email' => 'admin@gmail.com',
+                'age' => 35,
+                'gender' => 'm',
+                'city' => 'Mumbai',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            
+            ]
+        ]);
     }
 
     /**

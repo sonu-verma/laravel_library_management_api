@@ -20,6 +20,19 @@ class CreateBooksTable extends Migration
             $table->string('cover_image');
             $table->timestamps();
         });
+
+        DB::table('books')->insert([
+            [
+                'book_name'    => '3 Mistakes in my life', 
+                'author'     => 'Chetan Bhagat',
+                'cover_image'     => 'default.png', 
+            ],
+            [
+                'book_name'    => '2 states', 
+                'author'     => 'Chetan Bhagat',
+                'cover_image'     => 'default.png', 
+            ]
+        ]);
     }
 
     /**
